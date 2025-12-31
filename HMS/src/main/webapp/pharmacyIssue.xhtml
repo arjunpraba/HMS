@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Issue Medicine</title>
+</h:head>
+
+<h:body>
+
+<h:form id="pharmacyForm">
+
+    <p:panel header="Issue Medicine">
+
+        <p:messages id="msgs" autoUpdate="true"/>
+
+        <p:outputLabel for="pid" value="Patient ID"/>
+        <p:inputText id="pid"
+                     value="#{pharmacyBean.pid}"
+                     required="true"/>
+
+        <br/><br/>
+
+        <p:commandButton value="Search"
+                         action="#{pharmacyBean.search}"
+                         update="@form"
+                         process="@form"/>
+
+        <br/><br/>
+
+        <p:dataTable id="tbl"
+                     value="#{pharmacyBean.prescriptions}"
+                     var="p"
+                     rendered="#{not empty pharmacyBean.prescriptions}">
+
+            <p:column headerText="Medicine">
+                #{p.medicine.name}
+            </p:column>
+
+            <p:column headerText="Prescribed Qty">
+                #{p.prescribedQty}
+            </p:column>
+
+            <p:column headerText="Issue Qty">
+                <p:inputText value="#{p.issuedQty}" />
+            </p:column>
+
+            <p:column headerText="Action">
+                <p:commandButton value="Issue"
+                                 action="#{pharmacyBean.issue(p)}"
+                                 process="@this"
+                                 update="@form"/>
+            </p:column>
+
+        </p:dataTable>
+
+    </p:panel>
+
+</h:form>    
+
+</h:body>
+</html>

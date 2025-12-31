@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Issue Sequence</title>
+</h:head>
+ 
+<h:body>
+
+<h:form>
+
+<p:panel header="Issue Sequence Report">
+
+    <p:dataTable value="#{pharmacyReportBean.results}" var="r">
+
+        <p:column headerText="Medicine">
+            #{r[0]}
+        </p:column>
+
+        <p:column headerText="Issued Qty">
+            #{r[1]}
+        </p:column>
+
+    </p:dataTable>
+
+</p:panel>
+
+</h:form>
+</h:body>
+</html>

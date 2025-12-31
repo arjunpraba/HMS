@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Patient Registered Report</title>
+</h:head>
+
+<h:body>
+
+<h:form>
+
+<p:panel header="Patient Registered Report">
+
+    <p:outputLabel value="From Date"/>
+    <p:calendar value="#{emergencyReportBean.fromDate}"
+                pattern="yyyy-MM-dd" showIcon="true"/>
+
+    <p:outputLabel value="To Date"/>
+    <p:calendar value="#{emergencyReportBean.toDate}"
+                pattern="yyyy-MM-dd" showIcon="true"/>
+
+    <br/><br/>
+
+    <p:commandButton value="Generate"
+                     action="#{emergencyReportBean.generate}"
+                     update="summary cityTbl"/>
+
+    <br/><br/>
+
+    <h:panelGroup id="summary">
+        <h:outputText value="Total Patients : #{emergencyReportBean.summary[0]}"/><br/>
+        <h:outputText value="Male : #{emergencyReportBean.summary[1]}"/><br/>
+        <h:outputText value="Female : #{emergencyReportBean.summary[2]}"/>
+    </h:panelGroup>
+
+    <br/><br/>
+
+    <p:dataTable id="cityTbl"
+                 value="#{emergencyReportBean.cityWise}"
+                 var="c"
+                 rendered="#{not empty emergencyReportBean.cityWise}">
+
+        <p:column headerText="City">
+            #{c[0]}
+        </p:column>
+
+        <p:column headerText="Patients">
+            #{c[1]}
+        </p:column>
+
+    </p:dataTable>
+           
+</p:panel>
+
+</h:form>
+</h:body>
+</html>

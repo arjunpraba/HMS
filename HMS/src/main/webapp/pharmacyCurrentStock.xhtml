@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Current Stock</title>
+</h:head>
+
+<h:body>
+
+<h:form>
+
+<p:panel header="Current Medicine Stock">
+
+    <p:commandButton value="Load Stock"
+                     action="#{pharmacyReportBean.loadCurrentStock}"
+                     update="tbl"/>
+
+    <p:dataTable id="tbl"
+                 value="#{pharmacyReportBean.results}"
+                 var="r"
+                 rendered="#{not empty pharmacyReportBean.results}">
+
+        <p:column headerText="Medicine">
+            #{r[0]}
+        </p:column>
+
+        <p:column headerText="Available Qty">
+            #{r[1]}
+        </p:column>
+
+    </p:dataTable>   
+
+</p:panel>
+
+</h:form>
+</h:body>
+</html>
